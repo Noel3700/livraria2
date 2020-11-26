@@ -24,4 +24,25 @@ class AutoresController extends Controller
             'autores'=>$autores
         ]);
     }
+    
+     public function create(){
+        return view('autores.create');
+    }
+    
+    public function store(Request $req){
+        //$novolivro = $req->all();
+        //dd($novolivro);
+        $novoAutor = $req->validate([
+            'nome'=>['required','min:3','max:100'],
+            'nacionalidade'=>['nullable','min:3','max:10'],
+            'data_nascimento'=>['nullable','date'],
+            'fotografia'=>['nullable'],
+
+        ]);
+        $autor=Autor::create($novoAutor);
+        
+        return redirect()->route('autores.show',[
+            'ida'=>$autor->id_autor
+        ]);
+    }
 }

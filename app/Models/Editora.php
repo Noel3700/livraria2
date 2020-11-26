@@ -10,6 +10,14 @@ class Editora extends Model
     use HasFactory;
     protected $primaryKey="id_editora";
     protected $table="editoras";
+    
+     protected $fillable = [
+        'nome',
+        'morada',
+        'observacoes'
+        
+    ];
+    
     public function livros(){
         return $this->belongsToMany(
             'App\Models\Livro',
