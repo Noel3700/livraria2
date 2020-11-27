@@ -17,5 +17,8 @@ Observacoes:{{$editora->observacoes}}<br>
 
 Created_at:{{$editora->created_at}}<br>
 Updated_at:{{$editora->updated_at}}<br>
-Deleted_at:{{$editora->deleted_at}}
+Deleted_at:{{$editora->deleted_at}}<br>
+    
+    <a href="{{route('editoras.edit', ['ide'=>$editora->id_editora])}}" class="btn btn-primary">Editar Editora
+</a>
 </ul>

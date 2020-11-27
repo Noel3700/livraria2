@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Nov-2020 às 10:02
+-- Generation Time: 27-Nov-2020 às 18:07
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -157,7 +157,9 @@ INSERT INTO `generos` (`id_genero`, `designacao`, `observacoes`, `created_at`, `
 (2, 'Direito Civil ', NULL, NULL, NULL, NULL),
 (3, 'Culinária', NULL, NULL, NULL, NULL),
 (4, 'Romance', NULL, NULL, NULL, NULL),
-(5, 'Policial e Thriller', NULL, NULL, NULL, NULL);
+(5, 'Policial e Thriller', NULL, NULL, NULL, NULL),
+(6, 'aasasasa', 'aadafas', '2020-11-27 15:05:06', '2020-11-27 15:05:06', NULL),
+(7, 'aasasasa', 'aadafas', '2020-11-27 15:07:00', '2020-11-27 15:07:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -168,10 +170,10 @@ INSERT INTO `generos` (`id_genero`, `designacao`, `observacoes`, `created_at`, `
 CREATE TABLE `livros` (
   `id_livro` int(11) NOT NULL,
   `titulo` varchar(100) NOT NULL,
-  `idioma` varchar(10) NOT NULL,
+  `idioma` varchar(10) DEFAULT NULL,
   `total_paginas` int(11) DEFAULT NULL,
   `data_edicao` datetime DEFAULT NULL,
-  `isbn` varchar(13) DEFAULT NULL,
+  `isbn` varchar(13) NOT NULL,
   `observacoes` varchar(255) DEFAULT NULL,
   `imagem_capa` varchar(255) DEFAULT NULL,
   `id_genero` int(11) DEFAULT NULL,
@@ -187,7 +189,7 @@ CREATE TABLE `livros` (
 --
 
 INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edicao`, `isbn`, `observacoes`, `imagem_capa`, `id_genero`, `id_autor`, `sinopse`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'sistema de informação de apoio a gestão', 'Portugês', NULL, NULL, '9728589433', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
+(1, 'sistema de informação de apoio a gestão', 'Português', NULL, NULL, '9728589433687', NULL, NULL, 1, 1, NULL, NULL, '2020-11-27 16:13:25', NULL),
 (2, 'cidades e regiões digitais:impacte na cidade e nas pessoas', 'Portugês', NULL, NULL, '9728830033', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL),
 (3, 'Informatica e Competencias Tecnologicas para a Sociedade da Informação', 'Portugês', NULL, NULL, '9789728830304', NULL, NULL, 1, 3, NULL, NULL, NULL, NULL),
 (4, 'Readings in Information Society', 'Inglês', NULL, NULL, '9789727228997', NULL, NULL, 3, 5, NULL, NULL, NULL, NULL),
@@ -269,7 +271,7 @@ ALTER TABLE `editoras`
 -- AUTO_INCREMENT for table `generos`
 --
 ALTER TABLE `generos`
-  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `livros`

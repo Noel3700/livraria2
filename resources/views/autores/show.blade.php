@@ -16,5 +16,8 @@ Data de Nascimento: {{$autores->data_nascimento}}<br>
 Fotografia: {{$autores->fotografia}}<br>
 Created_at: {{$autores->created_at}}<br>
 Updated_at: {{$autores->updated_at}}<br>
-Deleted_at: {{$autores->deleted_at}}
+Deleted_at: {{$autores->deleted_at}}<br>
+    <a href="{{route('autores.edit', ['ida'=>$autores->id_autor])}}" class="btn btn-primary">Editar Autor
+    {{$autores->nome}}
+</a>
 </ul>

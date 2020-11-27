@@ -45,4 +45,43 @@ class AutoresController extends Controller
             'ida'=>$autor->id_autor
         ]);
     }
+    
+    
+     public function edit(Request $req){
+        $editAutor=$req->ida;
+            $autor = Autor::where('id_autor',$editAutor)->first();
+        
+        return view('autores.edit',[
+            'autor'=>$autor
+        ]);
+            
+    }
+    
+    
+    public function update(Request $req){
+        $idAutor=$req->ida;
+        $novoAutor = $req->validate([
+            'nome'=>['required','min:3','max:100'],
+            'nacionalidade'=>['nullable','min:3','max:10'],
+            'data_nascimento'=>['nullable','date'],
+            'fotografia'=>['nullable'],
+
+        ]);
+        
+        
+        $autor->update($editAutor);
+        
+        return redirect()->route('autores.show',[
+            'ida'=>$autor->id_autor
+        ]);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

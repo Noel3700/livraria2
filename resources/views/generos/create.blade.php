@@ -1,4 +1,4 @@
-<form action="{{route('livros.store')}}" method="post">
+<form action="{{route('generos.store')}}" method="post">
 @csrf
 Designacao: <input type="text" name="designacao" value="{{old('designacao')}}"><br><br>
     @if ($errors->has('designacao'))  
