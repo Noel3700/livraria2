@@ -42,11 +42,20 @@ Imagem Capa: <input type="text" name="imagem_capa" value="{{$livro->imagem_capa}
     ERRO
     <br><br>
     @endif
-Género: <input type="text" name="id_genero" value="{{$livro->id_genero}}"><br><br>
+    
+    
+    
+Género: <select name="id_genero">
+    @foreach ($generos as $genero)
+    <option value="{{$genero->id_genero}}"@if($genero->id_genero==$livro->id_genero)selected @endif>{{$genero->designacao}}</option>
+    @endforeach
+    </select>
     @if ($errors->has('id_genero'))
     Digite um número
-    <br><br>
     @endif
+     <br><br>
+    
+    
     
 Autor: <input type="text" name="id_autor" value="{{$livro->id_autor}}"><br><br>
     @if ($errors->has('id_autor'))

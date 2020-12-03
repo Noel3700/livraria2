@@ -41,11 +41,15 @@ Imagem Capa: <input type="text" name="imagem_capa" value="{{old('imagem_capa')}}
     ERRO
     <br><br>
     @endif
-Género: <input type="text" name="id_genero" value="{{old('id_genero')}}"><br><br>
+Género:<select name="id_genero">
+    @foreach ($generos as $genero)
+    <option value="{{$genero->id_genero}}">{{$genero->designacao}}</option>
+    @endforeach
+    </select>
     @if ($errors->has('id_genero'))
     Digite um número
-    <br><br>
     @endif
+    <br><br>
     
 Autor: <input type="text" name="id_autor" value="{{old('id_autor')}}"><br><br>
     @if ($errors->has('id_autor'))
