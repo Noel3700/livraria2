@@ -1,30 +1,51 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8"/>
-    <title>@yield('titulo-pagina')</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
 
     <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/all.min.js')}}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Livraria</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @if(session()->has('mensagem'))
-    <div class="alet alert-danger" role="alert">
-    {{session('mensagem')}}
-    </div>
-    @endif
-    <h1 style="color: #00ff00;">@yield('header')</h1>
-    @yield('conteudo')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="{{route('livros.index')}}">Livros</a>
-      <a class="nav-item nav-link" href="{{route('generos.index')}}">Generos</a>
-      <a class="nav-item nav-link" href="{{route('editoras.index')}}">Editoras</a>
-      <a class="nav-item nav-link" href="{{route('autores.index')}}">Autores</a>
-       @guest
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    Livraria 
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -55,9 +76,14 @@
                                 </div>
                             </li>
                         @endguest
-        
-    </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-</nav>
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 </body>
 </html>

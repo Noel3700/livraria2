@@ -49,49 +49,52 @@ Route::get('/','App\Http\Controllers\PesquisaController@index')
 Route::post('/form','App\Http\Controllers\PesquisaController@formenviado')
     ->name('pesquisa.form');
 
-Route::get('/livros/create','App\Http\Controllers\LivrosController@create')->name('livros.create');
+Route::get('/livros/create','App\Http\Controllers\LivrosController@create')->name('livros.create')->middleware('auth');
 
-Route::post('/livros','App\Http\Controllers\LivrosController@store')->name('livros.store');
+Route::post('/livros','App\Http\Controllers\LivrosController@store')->name('livros.store')->middleware('auth');
 
-Route::get('/autores/create','App\Http\Controllers\AutoresController@create')->name('autores.create');
+Route::get('/autores/create','App\Http\Controllers\AutoresController@create')->name('autores.create')->middleware('auth');
 
-Route::post('/autores','App\Http\Controllers\AutoresController@store')->name('autores.store');
+Route::post('/autores','App\Http\Controllers\AutoresController@store')->name('autores.store')->middleware('auth');
 
-Route::get('/editoras/create','App\Http\Controllers\EditorasController@create')->name('editoras.create');
+Route::get('/editoras/create','App\Http\Controllers\EditorasController@create')->name('editoras.create')->middleware('auth');
 
-Route::post('/editoras','App\Http\Controllers\EditorasController@store')->name('editoras.store');
+Route::post('/editoras','App\Http\Controllers\EditorasController@store')->name('editoras.store')->middleware('auth');
 
-Route::get('/generos/create','App\Http\Controllers\GenerosController@create')->name('generos.create');
+Route::get('/generos/create','App\Http\Controllers\GenerosController@create')->name('generos.create')->middleware('auth');
 
-Route::post('/generos','App\Http\Controllers\GenerosController@store')->name('generos.store');
-
-
-
-Route::get('/livros/{id}/edit','App\Http\Controllers\LivrosController@edit')->name('livros.edit');
-Route::patch('/livros/{id}','App\Http\Controllers\LivrosController@update')->name('livros.update');
-
-
-Route::get('/autores/{ida}/edit','App\Http\Controllers\AutoresController@edit')->name('autores.edit');
-Route::patch('/autores/{ida}','App\Http\Controllers\AutoresController@update')->name('autores.update');
-
-
-Route::get('/editoras/{ide}/edit','App\Http\Controllers\EditorasController@edit')->name('editoras.edit');
-Route::patch('/editoras/{ide}','App\Http\Controllers\EditorasController@update')->name('editoras.update');
-
-Route::get('/generos/{idg}/edit','App\Http\Controllers\GenerosController@edit')->name('generos.edit');
-Route::patch('/generos/{idg}','App\Http\Controllers\GenerosController@update')->name('generos.update');
+Route::post('/generos','App\Http\Controllers\GenerosController@store')->name('generos.store')->middleware('auth');
 
 
 
+Route::get('/livros/{id}/edit','App\Http\Controllers\LivrosController@edit')->name('livros.edit')->middleware('auth');
+Route::patch('/livros/{id}','App\Http\Controllers\LivrosController@update')->name('livros.update')->middleware('auth');
 
-Route::get('/livros/{id}/delete','App\Http\Controllers\LivrosController@delete')->name('livros.delete');
-Route::delete('/livros','App\Http\Controllers\LivrosController@destroy')->name('livros.destroy');
 
-Route::get('/autores/{ida}/delete','App\Http\Controllers\AutoresController@delete')->name('autores.delete');
-Route::delete('/autores','App\Http\Controllers\AutoresController@destroy')->name('autores.destroy');
+Route::get('/autores/{ida}/edit','App\Http\Controllers\AutoresController@edit')->name('autores.edit')->middleware('auth');
+Route::patch('/autores/{ida}','App\Http\Controllers\AutoresController@update')->name('autores.update')->middleware('auth');
 
-Route::get('/editoras/{ide}/delete','App\Http\Controllers\EditorasController@delete')->name('editoras.delete');
-Route::delete('/editoras','App\Http\Controllers\EditorasController@destroy')->name('editoras.destroy');
 
-Route::get('/generos/{idg}/delete','App\Http\Controllers\GenerosController@delete')->name('generos.delete');
-Route::delete('/generos','App\Http\Controllers\GenerosController@destroy')->name('generos.destroy');
+Route::get('/editoras/{ide}/edit','App\Http\Controllers\EditorasController@edit')->name('editoras.edit')->middleware('auth');
+Route::patch('/editoras/{ide}','App\Http\Controllers\EditorasController@update')->name('editoras.update')->middleware('auth');
+
+Route::get('/generos/{idg}/edit','App\Http\Controllers\GenerosController@edit')->name('generos.edit')->middleware('auth');
+Route::patch('/generos/{idg}','App\Http\Controllers\GenerosController@update')->name('generos.update')->middleware('auth');
+
+
+
+
+Route::get('/livros/{id}/delete','App\Http\Controllers\LivrosController@delete')->name('livros.delete')->middleware('auth');
+Route::delete('/livros','App\Http\Controllers\LivrosController@destroy')->name('livros.destroy')->middleware('auth');
+
+Route::get('/autores/{ida}/delete','App\Http\Controllers\AutoresController@delete')->name('autores.delete')->middleware('auth')->middleware('auth');
+Route::delete('/autores','App\Http\Controllers\AutoresController@destroy')->name('autores.destroy')->middleware('auth');
+
+Route::get('/editoras/{ide}/delete','App\Http\Controllers\EditorasController@delete')->name('editoras.delete')->middleware('auth');
+Route::delete('/editoras','App\Http\Controllers\EditorasController@destroy')->name('editoras.destroy')->middleware('auth');
+
+Route::get('/generos/{idg}/delete','App\Http\Controllers\GenerosController@delete')->name('generos.delete')->middleware('auth');
+Route::delete('/generos','App\Http\Controllers\GenerosController@destroy')->name('generos.destroy')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
