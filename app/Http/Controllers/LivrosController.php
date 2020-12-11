@@ -20,7 +20,7 @@ class LivrosController extends Controller
         $idLivro = $request->id;
         //$livro=Livro::findOrFail($idLivro);
         //$livro=Livro::find($idLivro);
-        $livro=Livro::where('id_livro',$idLivro)->with(['genero','autores','editoras'])->first();
+        $livro=Livro::where('id_livro',$idLivro)->with(['genero','autores','editoras','user'])->first();
         return view('livros.show',[
             'livro'=>$livro
         ]);
@@ -69,10 +69,18 @@ class LivrosController extends Controller
         $genero=Genero::all();
             $livro = Livro::where('id_livro',$editLivro)->first();
         
-        return view('livros.edit',[
-            'livro'=>$livro,
-            'generos'=>$genero
-        ]);
+        if(isset($livro->user->id_user)){
+       if(Auth::user()->id==$livro->user->id_user){
+           return view('livros.edit',['livros'=>$livro,'generos'=>$generos]);
+       } 
+        else{
+            return view('index');
+        }
+    }
+    
+    else{
+        return view('livros.edit',['livro'=>$livro,'generos'=>$generos]);
+    }
             
     }
     
@@ -129,6 +137,9 @@ class LivrosController extends Controller
         }
        
     }
+    
+    
+    
     
     
 }

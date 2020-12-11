@@ -71,5 +71,7 @@ Sinopse:<textarea  name="sinopse" value="{{$livro->sinopse}}"></textarea><br><br
     
 <input type="submit" name="enviar">
 
+    
+    
 
 </form>
