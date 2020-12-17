@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Dez-2020 às 16:09
+-- Generation Time: 17-Dez-2020 às 15:24
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -71,6 +71,20 @@ CREATE TABLE `autores_livros` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentarios` int(11) NOT NULL,
+  `id_livro` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `comentario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aprovado` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -204,7 +218,8 @@ INSERT INTO `livros` (`id_livro`, `titulo`, `idioma`, `total_paginas`, `data_edi
 (12, 'Repensar a Sociedade da Informação e do Conhecimento no Início do Século XXI', 'Português', NULL, NULL, '9789726186953', NULL, NULL, 3, 4, NULL, NULL, NULL, NULL, NULL),
 (13, 'Gestão da Informação em Museus: uma contribuição para o seu estudo', 'Português', NULL, NULL, '9789899901394', NULL, NULL, 2, 4, NULL, NULL, NULL, NULL, NULL),
 (14, 'Web 2.0 and Higher Education. A psychological perspective', 'Inglês', NULL, NULL, '9783659683466', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL);
+(15, 'Contribuições para a discussão de um modelo de Governo Eletrónico Local para Angola', 'Português', NULL, NULL, '9789899933200', NULL, NULL, 1, 13, NULL, NULL, NULL, NULL, NULL),
+(16, 'manel', 'portugues', 21, NULL, '1232345654376', 'nenhuma', NULL, 3, 2, 'nada', '2020-12-11 15:08:41', '2020-12-11 15:08:41', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -218,6 +233,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_user` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'normal' COMMENT 'admin ou normal',
   `remenber_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -227,8 +243,10 @@ CREATE TABLE `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remenber_token`, `created_at`, `updated_at`) VALUES
-(1, 'antonio costa', 'costinha53@gmail.com', NULL, '$2y$10$d8Ez68hkiG79lxCu4GmtGer5Fj3hD7hdCp853.3.F7oheevFF7xEW', NULL, '2020-12-10 13:56:30', '2020-12-10 13:56:30');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_user`, `remenber_token`, `created_at`, `updated_at`) VALUES
+(1, 'antonio costa', 'costinha53@gmail.com', NULL, '$2y$10$d8Ez68hkiG79lxCu4GmtGer5Fj3hD7hdCp853.3.F7oheevFF7xEW', 'normal', NULL, '2020-12-10 13:56:30', '2020-12-10 13:56:30'),
+(2, 'noel', 'noel@gmail.com', NULL, '$2y$10$sSwT3k3nms0x6TBza/f.D..UD332vIIM6XnbDFCQS7Bc0tB99cx4e', 'normal', NULL, '2020-12-11 15:06:20', '2020-12-11 15:06:20'),
+(3, 'filips', 'filipino@gmail.com', NULL, '$2y$10$JM/b7O1INLFGgUPhsRsyIOc8nQYtwA6OEPp7M3NPEGvqomd0cjWrW', 'normal', NULL, '2020-12-11 16:00:57', '2020-12-11 16:00:57');
 
 --
 -- Indexes for dumped tables
@@ -245,6 +263,12 @@ ALTER TABLE `autores`
 --
 ALTER TABLE `autores_livros`
   ADD PRIMARY KEY (`id_al`);
+
+--
+-- Indexes for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentarios`);
 
 --
 -- Indexes for table `edicoes`
@@ -293,6 +317,12 @@ ALTER TABLE `autores_livros`
   MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentarios` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `editoras`
 --
 ALTER TABLE `editoras`
@@ -308,13 +338,13 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_livro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

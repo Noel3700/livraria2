@@ -8,7 +8,7 @@ Data Edição: {{$livro->data_edicao}}<br>
 Total paginas: {{$livro->total_paginas}}<br>
 Observações: {{$livro->observacoes}}<br>
 Imagem Capa: {{$livro->imagem_capa}}<br>
-    
+
  @if(isset ($livro->id_user))
         Criador: {{$livro->user->name}}<br>
     @endif
@@ -40,8 +40,19 @@ Imagem Capa: {{$livro->imagem_capa}}<br>
         Sem o nome do autor definido
         </div>
     @endif
+    
+    
 
 Sinopse: {{$livro->sinopse}}<br>
+    
+  Comentário: <input type="text" name="comentarios" value="{{old('comentarios')}}"><br><br>
+    @if ($errors->has('comentarios'))
+    Mínimo de 1 caracter
+    
+    <br><br>
+    @endif
+    
+    
 Created_at: {{$livro->created_at}}<br>
 Updated_at: {{$livro->updated_at}}<br>
 Deleted_at: {{$livro->deleted_at}}<br>
@@ -62,4 +73,7 @@ Deleted_at: {{$livro->deleted_at}}<br>
     
     @endif
     @endif
+    
+
+  
 </ul>
