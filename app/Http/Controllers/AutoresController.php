@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Autor;
 
 class AutoresController extends Controller
@@ -26,8 +27,10 @@ class AutoresController extends Controller
     }
     
      public function create(){
+         if(Gate::allows('admin')){
         return view('autores.create');
     }
+     }
     
     public function store(Request $req){
         //$novolivro = $req->all();
@@ -49,13 +52,18 @@ class AutoresController extends Controller
     
      public function edit(Request $req){
         $editAutor=$req->ida;
+         if(Gate::allows('admin')){
             $autor = Autor::where('id_autor',$editAutor)->first();
         
         return view('autores.edit',[
             'autor'=>$autor
         ]);
+         }
+         else{
+            return redirect()->route('autores.index')->with('mensagem','Não tem permissão para aceder à área pretendida.');
             
     }
+     }
     
     
     public function update(Request $req){

@@ -3,8 +3,7 @@
      @method('patch')
     
     
-    <form action="{{route('livros.update',['id'=>$livro->id_livro])}}" method="post">
-@csrf
+   
    
         
         

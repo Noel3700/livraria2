@@ -29,17 +29,17 @@ class LivrosController extends Controller
     }
     
     public function create(){
-        if(Gate::allows('admin')){
+       
         $generos = Genero::all();
         return view('livros.create',[
             'generos'=>$generos
         ]);
-    }
+    
     }
     
     public function store(Request $req){
         
-        if(Gate::allows('admin')){
+        
         //$novolivro = $req->all();
         //dd($novolivro);
         $novoLivro = $req->validate([
@@ -66,7 +66,7 @@ class LivrosController extends Controller
             'id'=>$livro->id_livro
         ]);
         
-    }
+    
     }
     
     public function edit(Request $req){
