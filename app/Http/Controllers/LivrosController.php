@@ -50,11 +50,21 @@ class LivrosController extends Controller
             'data_edicao'=>['nullable','date'],
             'isbn'=>['nullable','min:13','max:13'],  
             'observacoes'=>['nullable','min:1','max:255'],
-            'imagem_capa'=>['nullable'],
+            'imagem_capa'=>['image','nullable','max:2000'],
             'id_genero'=>['numeric','nullable'],
             'id_autor'=>['numeric','nullable'],
             'sinopse'=>['nullable','min:3','max:255'],
         ]);
+        if ($req->hasFile('imagem_capa')){
+            $nomeimagem = $req->file('imagem_capa')->getClientOriginalName();
+            
+            $nomeImagem = time(). '_'. $nomeimagem;
+            $guardarImagem = $req->file('imagem_capa')->storeAs('imagens/livros',$nomeImagem);
+            
+            $novoLivro['imagem_capa']=$nomeImagem;
+        }
+        
+        
         if(Auth::check()){
             $userAtual = Auth::user()->id;
             $novoLivro['id_user']=$userAtual;
@@ -110,7 +120,7 @@ class LivrosController extends Controller
             'data_edicao'=>['nullable','date'],
             'isbn'=>['nullable','min:13','max:13'],  
             'observacoes'=>['nullable','min:1','max:255'],
-            'imagem_capa'=>['nullable'],
+            'imagem_capa'=>['image','nullable','max:2000'],
             'id_genero'=>['numeric','nullable'],
             'id_autor'=>['numeric','nullable'],
             'sinopse'=>['nullable','min:3','max:255'],
